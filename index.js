@@ -1,20 +1,15 @@
-const express=require('express')
+const express=require('express') 
 const mongoose=require('mongoose')
 
-app=express()
-
+const app=express()
+const PORT=8000
+//Middleware
 app.use(express.json())
-
-const PORT=3000
-
 //DB Connection
 //first url with connect
-mongoose.connect('mongodb://admin:admin@mongodb:27017/todo?authSource=admin',{
-    useNewUrlParser:true,
-    useUnifiedTobology:true
-})
+mongoose.connect('mongodb://admin:admin@localhost:27017/todo?authSource=admin')
 
-const db=mongoose.connection
+const db=mongoose.connection;
 
 db.on('error',()=>{
 
@@ -23,20 +18,13 @@ db.on('error',()=>{
 )
 
 db.once('open',()=>{
-    console.log("")
+    console.log("connected to DB Successful")
 })
-
-
-
-
-
-
-
-
-
 
 
 
 app.listen(PORT,()=>{
     console.log("Server Started :)");
 })
+//netstat -ano | findstr :9323
+//taskkill /PID 27924 /F
