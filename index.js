@@ -1,7 +1,8 @@
 const express=require('express') 
 const mongoose=require('mongoose')
+const router = require('./routes/TaskRoute')
 
-const app=express()
+const app=express() 
 const PORT=8000
 //Middleware
 app.use(express.json())
@@ -20,6 +21,11 @@ db.on('error',()=>{
 db.once('open',()=>{
     console.log("connected to DB Successful")
 })
+
+
+app.use(router)
+
+
 
 
 
