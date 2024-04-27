@@ -1,8 +1,25 @@
 const express=require('express') 
 const mongoose=require('mongoose')
 const router = require('./routes/TaskRoute')
-
+const expressWinston=require('express-winston')
+const { translateAliases } = require('./models/task')
+const { transports, format } = require('winston')
 const app=express() 
+
+
+//Middleware Function
+app.use(expressWinston.logger({
+    transports:[
+        new transports.Console()
+    ],
+    format: format.combine(
+        format.json(),
+        format.timestamp(),
+        format.prettyPrint()
+    )
+     
+}))
+
 const PORT=8000
 //Middleware
 app.use(express.json())
